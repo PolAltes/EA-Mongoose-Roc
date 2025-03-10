@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { UserModel, IUser } from './user.js';
+import  {UserModel, IUser } from './models/user.js';
 
 async function main() {
   mongoose.set('strictQuery', true); // Mantiene el comportamiento actual
@@ -20,7 +20,7 @@ async function main() {
   console.log("user2",user2);
 
   // findById devuelve un objeto usando el _id.
-  const user3: IUser | null = await UserModel.findById(user2._id);
+  const user3: IUser | null = await UserModel.findOne();
   console.log("user3",user3);
 
   // findOne devuelve un objeto usando un filtro.
@@ -31,7 +31,7 @@ async function main() {
   // select('name email') solo devuelve name y email.
   // lean() devuelve un objeto plano de JS en lugar de un documento de Mongoose.
   const user5: Partial<IUser> | null  = await UserModel.findOne({ name: 'Bill' })
-    .select('name email').lean();
+    .select('name email').lean(); //treu les dades afegides de MongoDB per tenir només el JSON amb la informació que es vol
   console.log("user5",user5);
 }
 
